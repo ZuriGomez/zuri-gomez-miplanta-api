@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 export function up(knex) {
-  return knex.schema.createTable("user", (table) => {
+  return knex.schema.createTable("listings", (table) => {
     table.increments("id").primary();
     table.integer("user_id").unsigned().notNullable();
     table.string("photo").notNullable();
@@ -32,7 +32,7 @@ export function up(knex) {
     table
       .foreign("user_id")
       .references("id")
-      .inTable("users")
+      .inTable("user")
       .onDelete("CASCADE");
   });
 }
