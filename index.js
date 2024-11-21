@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 // import routers
 import usersRoutes from "./routes/users.js";
-import listingRoutes from "./routes/listings.js"
+// import listingRoutes from "./routes/listings.js"
 
 dotenv.config();
 const app = express();
@@ -19,7 +19,7 @@ app.get("/api", async (req, res) => {
 
    //Using routes
    app.use("/api/users", usersRoutes);
-   app.use("/api/listings", listingRoutes);
+//    app.use("/api/listings", listingRoutes);
    
    
    // processing unsupported routes
