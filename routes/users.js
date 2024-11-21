@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllUsers, getUserById } from "../controllers/users-controller.js";
+import { getAllUsers, getUserById, createUser } from "../controllers/users-controller.js";
 
 const router = express.Router();
 
@@ -9,7 +9,7 @@ router.get('/', getAllUsers);
 // Route to get single user
 router.get("/:id", getUserById);
 
-// // Route to create user
-// router.post("/", createListing);
+// Route to create user
+router.post("/", createUser);
 
 export default router;
