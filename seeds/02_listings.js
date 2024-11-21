@@ -21,8 +21,7 @@ export async function seed(knex) {
       temperature: "18-25°C",
       watering: "once per week",
       price: 45.99,
-      delivery: "pickup",
-      created_at: "2024-11-20T12:00:00.000Z",
+      delivery: "pickup"
     },
     {
       id: 2,
@@ -38,8 +37,7 @@ export async function seed(knex) {
       temperature: "20-30°C",
       watering: "every two weeks",
       price: 25.99,
-      delivery: "delivery",
-      created_at: "2024-11-20T12:05:00.000Z",
+      delivery: "delivery"
     },
     {
       id: 3,
@@ -55,8 +53,7 @@ export async function seed(knex) {
       temperature: "25-35°C",
       watering: "once per week",
       price: 15.49,
-      delivery: "pickup",
-      created_at: "2024-11-20T12:10:00.000Z",
+      delivery: "pickup"
     },
     {
       id: 4,
@@ -72,8 +69,7 @@ export async function seed(knex) {
       temperature: "15-25°C",
       watering: "every two weeks",
       price: 35.0,
-      delivery: "delivery",
-      created_at: "2024-11-20T12:15:00.000Z",
+      delivery: "delivery"
     },
     {
       id: 5,
@@ -91,7 +87,6 @@ export async function seed(knex) {
       watering: "every month",
       price: 18.0,
       delivery: "pickup",
-      created_at: "2024-11-20T12:20:00.000Z",
     },
   ]);
 }
