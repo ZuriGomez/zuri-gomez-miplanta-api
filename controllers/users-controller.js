@@ -27,6 +27,7 @@ const getUserById = async (req, res) => {
   }
 };
 
+//Create new user 
 const createUser = async (req, res) => {
   const validateEmail = (email) => {
     const regEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -60,6 +61,12 @@ const createUser = async (req, res) => {
   }
 
   try {
+
+    const existingUser = await knex("user").where({ email }).first();
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already in use" });
+    }
+    
     const [newUserId] = await knex("user").insert({
       user_name,
       email,
@@ -74,4 +81,46 @@ const createUser = async (req, res) => {
   }
 };
 
-export { getAllUsers, getUserById, createUser };
+//User log in
+const loginUser = async (req, res) => {
+  const validateEmail = (email) => {
+    const regEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regEX.test(email);
+    };
+  
+  const { email, password } = req.body;
+
+  if (
+    !email ||
+    !password ||
+    typeof email !== "string" ||
+    !email.trim() ||
+    !validateEmail(email) ||
+    typeof password !== "string" ||
+    !password.trim() ||
+    password.trim().length === 0
+) {
+    return res.status(400).json({
+        message:
+            "Both email and password must be filled out correctly. Email must be valid, and password should not contain spaces.",
+    });
+}
+
+try {
+  const user = await knex("user").where({ email, password }).first();
+
+  if (!user) {
+      return res.status(401).json({ message: "Invalid email or password." });
+  }
+  const { confirm_password, ...userData } = user;
+
+  res.status(200).json({
+      message: "Login successful",
+      user: userData,
+  });
+} catch (error) {
+  res.status(500).json({ message: "Error logging in", error });
+}
+};
+
+export { getAllUsers, getUserById, createUser,loginUser };
