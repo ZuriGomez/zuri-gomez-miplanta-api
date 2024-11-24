@@ -1,14 +1,15 @@
-// import express from "express";
+import express from "express";
+const router = express.Router();
+import {
+  getAllListings,
+  getListingById,
+  createListing,
+} from "../controllers/listings-controller.js";
 
-// const router = express.Router();
+router.get("/", getAllListings);
 
-// // Route to get list of all listings
-// router.get("/", getAllListings);
+router.get("/:id", getListingById);
 
-// // Route to get single listing
-// router.get("/:id", getListingbyId);
-// // 
-// // Route to create a plant listing
-// router.post("/", createListing);
+router.post('/', createListing);
 
-// export default router;
+export default router;
