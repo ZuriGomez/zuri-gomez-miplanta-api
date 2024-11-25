@@ -77,6 +77,7 @@ const createUser = async (req, res) => {
     const newUser = await knex("user").where({ id: newUserId }).first();
     res.status(201).json(newUser);
   } catch (error) {
+    console.error("Error creating user:", error);
     res.status(500).json({ message: "Error creating user", error });
   }
 };
