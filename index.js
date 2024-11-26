@@ -13,6 +13,7 @@ const { PORT, BACKEND_URL, CORS_ORIGIN } = process.env;
 
 app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.json());
+app.use(express.static("public"));
 
 app.get("/api", async (req, res) => {
   res.status(200).json({ message: "Welcome to miPlanta API" });

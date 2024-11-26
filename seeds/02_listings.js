@@ -2,6 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+
 export async function seed(knex) {
   // Deletes ALL existing entries
   await knex("listings").del();
@@ -10,7 +11,7 @@ export async function seed(knex) {
     {
       id: 1,
       user_id: 2,
-      photo: "https://example.com/images/plant1.jpg",
+      photo: "./images/ficus_tree.jpg",
       title: "Ficus Tree",
       description: "A beautiful ficus tree perfect for your home office.",
       maintenance: "medium",
@@ -26,7 +27,7 @@ export async function seed(knex) {
     {
       id: 2,
       user_id: 3,
-      photo: "https://example.com/images/plant2.jpg",
+      photo: "./images/succulent_collection.jpg",
       title: "Succulent Collection",
       description: "A set of 3 different types of succulents in small pots.",
       maintenance: "low",
@@ -42,7 +43,7 @@ export async function seed(knex) {
     {
       id: 3,
       user_id: 1,
-      photo: "https://example.com/images/plant3.jpg",
+      photo: "./images/cactus_plant.jpg",
       title: "Cactus Plant",
       description: "A tall cactus plant suitable for dry, sunny areas.",
       maintenance: "low",
@@ -58,7 +59,7 @@ export async function seed(knex) {
     {
       id: 4,
       user_id: 2,
-      photo: "https://example.com/images/plant4.jpg",
+      photo: "./images/fern_plant.jpg",
       title: "Fern Plant",
       description: "A lush fern that thrives in shaded, humid environments.",
       maintenance: "medium",
@@ -74,7 +75,7 @@ export async function seed(knex) {
     {
       id: 5,
       user_id: 1,
-      photo: "https://example.com/images/plant5.jpg",
+      photo: "./images/aloe_vera.jpg",
       title: "Aloe Vera",
       description:
         "Aloe Vera plant, great for medicinal use and easy to care for.",
