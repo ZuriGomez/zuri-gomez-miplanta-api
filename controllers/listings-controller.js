@@ -17,17 +17,27 @@ const getAllListings = async (req, res) => {
 const getListingById = async (req, res) => {
   const { id } = req.params;
   try {
-    const listing = await knex("listings").where({ id }).first();
+    const listing = await knex("listings")
+      .join("user", "listings.user_id", "=", "user.id")
+      .select (
+        "listings.*",
+        "user.user_name as seller_name"
+      )
+      .where("listings.id", id)
+      .first();
+
     if (listing) {
       res.status(200).json(listing);
     } else {
       res.status(404).json({ message: "Listing not found" });
     }
   } catch (error) {
+    console.error("Detailed Error: ", error);
     res.status(500).json({ message: "Error getting listing" });
   }
 };
 
+//Create new Listing
 const createListing = async (req, res) => {
   const {
     user_id,
