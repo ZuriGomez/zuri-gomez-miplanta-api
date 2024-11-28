@@ -13,20 +13,48 @@ const getAllListings = async (req, res) => {
   }
 };
 
+//Get listings by user ID - dynamically
+const getUserListings = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const listings = await knex("listings")
+      .where("user_id", userId)
+      .select("*");
+    res.status(200).json(listings);
+  } catch (error) {
+    console.error("Error getting user listings:", error);
+    res.status(500).json({ message: "Error getting user listings" });
+  }
+};
+
+//Get listingst by hardcoded userID (for demo)
+const getUserListingsDemo = async (req, res) => {
+  const userId = 1;
+  try {
+    const listings = await knex("listings")
+      .where("user_id", userId)
+      .select("title", "price", "photo");
+    res.status(200).json(listings);
+  } catch (error) {
+    console.error("Error getting user listings:", error);
+    res.status(500).json({ message: "Error getting user listings" });
+  }
+};
+
 // Get listing by ID
 const getListingById = async (req, res) => {
   const { id } = req.params;
   try {
     const listing = await knex("listings")
       .join("user", "listings.user_id", "=", "user.id")
-      .select (
+      .select(
         "listings.*",
         "user.user_name as seller_name",
-        knex.raw('COUNT(reviews.id) as review_count')
+        knex.raw("COUNT(reviews.id) as review_count")
       )
-      .leftJoin("reviews","user.id","=","reviews.reviewed_user_id")
+      .leftJoin("reviews", "user.id", "=", "reviews.reviewed_user_id")
       .where("listings.id", id)
-      .groupBy("listings.id","user.id")
+      .groupBy("listings.id", "user.id")
       .first();
 
     if (listing) {
@@ -123,4 +151,4 @@ const createListing = async (req, res) => {
   }
 };
 
-export { createListing, getAllListings, getListingById };
+export { createListing, getAllListings, getListingById, getUserListings, getUserListingsDemo };
