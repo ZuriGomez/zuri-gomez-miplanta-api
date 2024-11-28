@@ -21,9 +21,12 @@ const getListingById = async (req, res) => {
       .join("user", "listings.user_id", "=", "user.id")
       .select (
         "listings.*",
-        "user.user_name as seller_name"
+        "user.user_name as seller_name",
+        knex.raw('COUNT(reviews.id) as review_count')
       )
+      .leftJoin("reviews","user.id","=","reviews.reviewed_user_id")
       .where("listings.id", id)
+      .groupBy("listings.id","user.id")
       .first();
 
     if (listing) {
