@@ -5,7 +5,7 @@
 export function up(knex) {
   return knex.schema.createTable("listings", (table) => {
     table.increments("id").primary();
-    table.integer("user_id").unsigned().notNullable();
+    table.integer("user_id").unsigned().notNullable().defaultTo(1);
     table.string("photo").notNullable();
     table.string("title").notNullable();
     table.text("description").notNullable();

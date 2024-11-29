@@ -11,7 +11,7 @@ export async function seed(knex) {
     {
       id: 1,
       user_id: 4,
-      photo: "./images/ficus_tree.jpg",
+      photo: "uploads/ficus_tree.jpg",
       title: "Ficus Tree",
       description: "A beautiful ficus tree perfect for your home office.",
       maintenance: "medium",
@@ -27,7 +27,7 @@ export async function seed(knex) {
     {
       id: 2,
       user_id: 7,
-      photo: "./images/succulent_collection.jpg",
+      photo: "uploads/succulent_collection.jpg",
       title: "Succulent Collection",
       description: "A set of 3 different types of succulents in small pots.",
       maintenance: "low",
@@ -43,7 +43,7 @@ export async function seed(knex) {
     {
       id: 3,
       user_id: 6,
-      photo: "./images/monstera.jpg",
+      photo: "uploads/monstera.jpg",
       title: "Voluminous Monstera",
       description:
         "A lush, voluminous Monstera plant with large, vibrant green leaves.",
@@ -59,7 +59,7 @@ export async function seed(knex) {
     {
       id: 4,
       user_id: 1,
-      photo: "./images/cactus_plant.jpg",
+      photo: "uploads/cactus_plant.jpg",
       title: "Cactus Plant",
       description: "A tall cactus plant suitable for dry, sunny areas.",
       maintenance: "low",
@@ -75,7 +75,7 @@ export async function seed(knex) {
     {
       id: 5,
       user_id: 5,
-      photo: "./images/fern_plant.jpg",
+      photo: "uploads/fern_plant.jpg",
       title: "Fern Plant",
       description: "A lush fern that thrives in shaded, humid environments.",
       maintenance: "medium",
@@ -91,7 +91,7 @@ export async function seed(knex) {
     {
       id: 6,
       user_id: 6,
-      photo: "./images/snake-plant2.jpg",
+      photo: "uploads/snake-plant2.jpg",
       title: "Healthy Snake Plant",
       description:
         "A robust snake plant known for its air-purifying qualities and easy maintenance.",
@@ -107,7 +107,7 @@ export async function seed(knex) {
     {
       id: 7,
       user_id: 6,
-      photo: "./images/snake_plant1.jpg",
+      photo: "uploads/snake_plant1.jpg",
       title: "Beautiful Snake Plant - pot included",
       description:
         "A striking plant with tall, green leaves, perfect for adding a touch of nature to your space.",
@@ -124,7 +124,7 @@ export async function seed(knex) {
     {
       id: 8,
       user_id: 4,
-      photo: "./images/aloe_vera.jpg",
+      photo: "uploads/aloe_vera.jpg",
       title: "Aloe Vera",
       description:
         "Aloe Vera plant, great for medicinal use and easy to care for.",
@@ -141,7 +141,7 @@ export async function seed(knex) {
     {
       id: 9,
       user_id: 6,
-      photo: "./images/golden-pothos.jpg",
+      photo: "uploads/golden-pothos.jpg",
       title: "Golden Pothos",
       description:
         "A versatile and hardy plant with trailing green and yellow leaves.",
@@ -157,7 +157,7 @@ export async function seed(knex) {
     {
       id: 10,
       user_id: 3,
-      photo: "./images/banana-plant.jpg",
+      photo: "uploads/banana-plant.jpg",
       title: "Banana Plant",
       description:
         "An exotic banana plant that adds a tropical vibe to any space.",
@@ -173,7 +173,7 @@ export async function seed(knex) {
     {
       id: 11,
       user_id: 1,
-      photo: "./images/spider-plant.jpg",
+      photo: "uploads/spider-plant.jpg",
       title: "Spider Plant",
       description:
         "A resilient spider plant that is perfect for low-maintenance indoor gardening.",
@@ -189,7 +189,7 @@ export async function seed(knex) {
     {
       id: 12,
       user_id: 2,
-      photo: "./images/zz-plant.jpg",
+      photo: "uploads/zz-plant.jpg",
       title: "ZZ Plant - pot included",
       description:
         "A hardy ZZ plant that thrives in low light conditions, complete with a modern, minimalist pot.",

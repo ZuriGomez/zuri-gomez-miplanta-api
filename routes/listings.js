@@ -1,5 +1,5 @@
 import express from "express";
-const router = express.Router();
+import authenticateUser from "../middlewares/auth.js";
 import {
   getAllListings,
   getListingById,
@@ -8,11 +8,13 @@ import {
   getUserListingsDemo,
 } from "../controllers/listings-controller.js";
 
+const router = express.Router();
+
 router.get("/", getAllListings);
 
 router.get("/:id", getListingById);
 
-router.post('/', createListing);
+router.post('/', authenticateUser, createListing);
 
 router.get("/user-listings/:userId", getUserListings); // Dynamic user ID route
 router.get("/user-listings-demo", getUserListingsDemo); // Hardcoded user ID route

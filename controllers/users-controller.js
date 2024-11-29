@@ -1,5 +1,10 @@
 import initKnex from "knex";
 import configuration from "../knexfile.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const knex = initKnex(configuration);
 
 // Get all users
@@ -115,9 +120,12 @@ try {
   }
   const { confirm_password, ...userData } = user;
 
+  const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {expiresIn: '3h'});
+
   res.status(200).json({
       message: "Login successful",
       user: userData,
+      token
   });
 } catch (error) {
   res.status(500).json({ message: "Error logging in", error });
