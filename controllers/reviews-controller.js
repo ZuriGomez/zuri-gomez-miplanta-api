@@ -6,7 +6,14 @@ const knex = initKnex(configuration);
 // Get all reviews
 const getAllReviews = async (req, res) => {
   try {
-    const reviews = await knex("reviews").select("*");
+    const reviews = await knex("reviews")
+    .join("user", "reviews.reviewer_id", "user.id")
+    .select(
+      "reviews.id",
+      "user.user_name as reviewer_name",
+      "reviews.review_text",
+      "reviews.created_at"
+    );
     res.status(200).json(reviews);
   } catch (error) {
     res.status(500).json({ message: "Error getting reviews" });

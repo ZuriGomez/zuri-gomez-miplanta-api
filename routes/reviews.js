@@ -7,10 +7,10 @@ import {
 } from "../controllers//reviews-controller.js";
 
 
-router.get("/reviews", getAllReviews);
+router.get("/", getAllReviews);
 
 router.get("/reviews/:id", getReviewById);
 
-router.post("/reviews", createReview); // Add this route for creating reviews 
+router.post("/", createReview); // Add this route for creating reviews 
 
 export default router;
