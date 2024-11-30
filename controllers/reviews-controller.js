@@ -3,7 +3,7 @@ import configuration from "../knexfile.js";
 
 const knex = initKnex(configuration);
 
-// Get all reviews
+// Get reviews by seller id
 const getReviewsBySellerId = async (req, res) => {
   const { sellerId } = req.params
   try {
@@ -24,6 +24,24 @@ const getReviewsBySellerId = async (req, res) => {
   }
   } catch (error) {
     res.status(500).json({ message: "Error getting reviews" });
+  }
+};
+
+const getSellerInfo = async (req, res) => {
+  const { sellerId } = req.params;  
+  try {
+    const seller = await knex("user")  
+      .select("user_name")  
+      .where({ id: sellerId })
+      .first();  
+
+    if (seller) {
+      res.status(200).json(seller);  // Return seller info if found
+    } else {
+      res.status(404).json({ message: "Seller not found" });  // Return 404 if no seller is found
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Error getting seller info" });  // Return 500 error if something goes wrong
   }
 };
 
@@ -77,4 +95,4 @@ const createReview = async (req, res) => {
   }
 };
 
-export { getReviewsBySellerId, getReviewById, createReview };
+export { getReviewsBySellerId, getSellerInfo, getReviewById, createReview };
