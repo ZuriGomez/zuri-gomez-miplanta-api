@@ -67,22 +67,22 @@ const createListing = async (req, res) => {
     maintenance,
     pot_included,
     pot_description,
-    height,
     sunlight,
     temperature,
     watering,
-    price,
     delivery,
   } = req.body;
 
-  console.log(req.photo, req.file);
+  // console.log(req.photo, req.file);
+  const price = Number (req.body.price);
+  const height = Number(req.body.height);
   const photo = req.file ? `uploads/${req.file.filename}` : "";
 
   const errors = [];
 
-  console.log("req.body", req.body)
-  console.log('req.file', req.file);
-  console.log('photo', photo);
+  // console.log("req.body", req.body)
+  // console.log('req.file', req.file);
+  // console.log('photo', photo);
 
   if (!photo || typeof photo !== "string" || !photo.trim()) {
     errors.push("Invalid photo");
@@ -107,7 +107,7 @@ const createListing = async (req, res) => {
   ) {
     errors.push("Invalid pot_description");
   }
-  if (typeof height !== "number") {
+  if (isNaN(height) || height <= 0) {
     errors.push("Invalid height");
   }
   if (
@@ -127,7 +127,7 @@ const createListing = async (req, res) => {
   ) {
     errors.push("Invalid watering");
   }
-  if (typeof price !== "number") {
+  if (isNaN(price) || price <= 0) {
     errors.push("Invalid price");
   }
   if (!delivery || !["pickup", "delivery"].includes(delivery)) {
