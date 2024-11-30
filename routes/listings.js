@@ -6,6 +6,7 @@ import {
   getListingById,
   getUserListings,
   createListing,
+  getUserListingsCount,
 } from "../controllers/listings-controller.js";
 
 const router = express.Router();
@@ -18,5 +19,7 @@ router.get("/user-listings/:id", getListingById);
 router.post('/', upload.single('photo'), authenticateUser, createListing);
 
 router.get("/user-listings", authenticateUser, getUserListings);
+
+router.get("/user-listings", authenticateUser, getUserListingsCount);
 
 export default router;

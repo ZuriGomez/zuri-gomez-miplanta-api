@@ -15,11 +15,11 @@ const getAllListings = async (req, res) => {
 
 //Get listings by user ID - dynamically
 const getUserListings = async (req, res) => {
-  // const { userId } = req.params;
   try {
     const userId = req.user;
     console.log(userId);
-    const listings = await knex("listings").where({user_id:userId});
+
+    const listings = await knex("listings").where({ user_id: userId });
 
     if (!listings || listings.length === 0) {
       return res.status(404).json({ message: "Listing not found" });
@@ -34,7 +34,7 @@ const getUserListings = async (req, res) => {
 // Get listing by ID
 const getListingById = async (req, res) => {
   const { id } = req.params;
-  console.log("id",id);
+  console.log("id", id);
   try {
     const listing = await knex("listings")
       .join("user", "listings.user_id", "=", "user.id")
@@ -59,6 +59,26 @@ const getListingById = async (req, res) => {
   }
 };
 
+// Get the count of listings for the logged-in user
+const getUserListingsCount = async (req, res) => {
+  try {
+    const userId = req.user; // Extract the logged-in user's ID from req.user
+    console.log("Logged-in User ID:", userId);
+
+    // Use knex to count the number of listings for the logged-in user
+    const listingCount = await knex("listings")
+      .count("id as count") // Count the number of listings
+      .where({ user_id: userId }) // Filter by the logged-in user
+      .first(); // Get the first row (result of the count)
+
+    // Send the count in the response
+    res.status(200).json({ count: listingCount.count });
+  } catch (error) {
+    console.error("Error getting user listings count:", error);
+    res.status(500).json({ message: "Error getting user listings count" });
+  }
+};
+
 //Create new Listing
 const createListing = async (req, res) => {
   const {
@@ -74,7 +94,7 @@ const createListing = async (req, res) => {
   } = req.body;
 
   // console.log(req.photo, req.file);
-  const price = Number (req.body.price);
+  const price = Number(req.body.price);
   const height = Number(req.body.height);
   const photo = req.file ? `uploads/${req.file.filename}` : "";
 
@@ -172,4 +192,5 @@ export {
   getAllListings,
   getListingById,
   getUserListings,
+  getUserListingsCount,
 };
