@@ -6,6 +6,7 @@ import {
   getListingById,
   getUserListings,
   createListing,
+  getUserInfo,
   getUserListingsCount,
 } from "../controllers/listings-controller.js";
 
@@ -19,6 +20,8 @@ router.get("/user-listings/:id", getListingById);
 router.post('/', upload.single('photo'), authenticateUser, createListing);
 
 router.get("/user-listings", authenticateUser, getUserListings);
+
+router.get("/info", authenticateUser, getUserInfo);
 
 router.get("/user-listings", authenticateUser, getUserListingsCount);
 

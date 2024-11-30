@@ -15,11 +15,11 @@ const getAllListings = async (req, res) => {
 
 //Get listings by user ID - dynamically
 const getUserListings = async (req, res) => {
+
   try {
     const userId = req.user;
     console.log(userId);
-
-    const listings = await knex("listings").where({ user_id: userId });
+    const listings = await knex("listings").where({user_id:userId});
 
     if (!listings || listings.length === 0) {
       return res.status(404).json({ message: "Listing not found" });
@@ -34,7 +34,7 @@ const getUserListings = async (req, res) => {
 // Get listing by ID
 const getListingById = async (req, res) => {
   const { id } = req.params;
-  console.log("id", id);
+  console.log("id",id);
   try {
     const listing = await knex("listings")
       .join("user", "listings.user_id", "=", "user.id")
@@ -59,6 +59,24 @@ const getListingById = async (req, res) => {
   }
 };
 
+const getUserInfo = async (req, res) => {
+  try {
+    const userId = req.user;
+    console.log(userId); 
+    const user = await knex("user")
+    .where({ id:userId })
+    .first(); 
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ username: user.user_name });
+  } catch (error) {
+    console.error("Error getting user info:", error);
+    res.status(500).json({ message: "Error getting user info" });
+  }
+};
+
 // Get the count of listings for the logged-in user
 const getUserListingsCount = async (req, res) => {
   try {
@@ -79,6 +97,7 @@ const getUserListingsCount = async (req, res) => {
   }
 };
 
+
 //Create new Listing
 const createListing = async (req, res) => {
   const {
@@ -94,15 +113,11 @@ const createListing = async (req, res) => {
   } = req.body;
 
   // console.log(req.photo, req.file);
-  const price = Number(req.body.price);
+  const price = Number (req.body.price);
   const height = Number(req.body.height);
   const photo = req.file ? `uploads/${req.file.filename}` : "";
 
   const errors = [];
-
-  // console.log("req.body", req.body)
-  // console.log('req.file', req.file);
-  // console.log('photo', photo);
 
   if (!photo || typeof photo !== "string" || !photo.trim()) {
     errors.push("Invalid photo");
@@ -192,5 +207,6 @@ export {
   getAllListings,
   getListingById,
   getUserListings,
+  getUserInfo,
   getUserListingsCount,
 };
