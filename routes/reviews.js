@@ -1,13 +1,13 @@
 import express from "express";
 const router = express.Router();
 import {
-  getAllReviews,
+  getReviewsBySellerId,
   getReviewById,
   createReview,
 } from "../controllers//reviews-controller.js";
 
 
-router.get("/", getAllReviews);
+router.get("/:sellerId", getReviewsBySellerId);
 
 router.get("/reviews/:id", getReviewById);
 
