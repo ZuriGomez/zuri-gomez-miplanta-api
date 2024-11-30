@@ -1,22 +1,22 @@
 import express from "express";
 import authenticateUser from "../middlewares/auth.js";
+import upload from "../middlewares/upload.js";
 import {
   getAllListings,
   getListingById,
-  createListing,
   getUserListings,
-  getUserListingsDemo,
+  createListing,
 } from "../controllers/listings-controller.js";
 
 const router = express.Router();
 
 router.get("/", getAllListings);
 
-router.get("/:id", getListingById);
+router.get("/user-listings/:id", getListingById);
 
-router.post('/', authenticateUser, createListing);
+// router.post('/', authenticateUser, createListing);
+router.post('/', upload.single('photo'), authenticateUser, createListing);
 
-router.get("/user-listings/:userId", getUserListings); // Dynamic user ID route
-router.get("/user-listings-demo", getUserListingsDemo); // Hardcoded user ID route
+router.get("/user-listings", authenticateUser, getUserListings);
 
 export default router;

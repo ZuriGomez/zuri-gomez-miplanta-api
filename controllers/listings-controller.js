@@ -1,10 +1,7 @@
 import initKnex from "knex";
 import configuration from "../knexfile.js";
-import multer from "multer";
-import path from "path";
 
 const knex = initKnex(configuration);
-
 
 // Get all listings
 const getAllListings = async (req, res) => {
@@ -18,25 +15,15 @@ const getAllListings = async (req, res) => {
 
 //Get listings by user ID - dynamically
 const getUserListings = async (req, res) => {
-  const { userId } = req.params;
+  // const { userId } = req.params;
   try {
-    const listings = await knex("listings")
-      .where("user_id", userId)
-      .select("*");
-    res.status(200).json(listings);
-  } catch (error) {
-    console.error("Error getting user listings:", error);
-    res.status(500).json({ message: "Error getting user listings" });
-  }
-};
+    const userId = req.user;
+    console.log(userId);
+    const listings = await knex("listings").where({user_id:userId});
 
-//Get listings by hardcoded userID (for demo)
-const getUserListingsDemo = async (req, res) => {
-  const userId = 1;
-  try {
-    const listings = await knex("listings")
-      .where("user_id", userId)
-      .select("title", "price", "photo");
+    if (!listings || listings.length === 0) {
+      return res.status(404).json({ message: "Listing not found" });
+    }
     res.status(200).json(listings);
   } catch (error) {
     console.error("Error getting user listings:", error);
@@ -47,6 +34,7 @@ const getUserListingsDemo = async (req, res) => {
 // Get listing by ID
 const getListingById = async (req, res) => {
   const { id } = req.params;
+  console.log("id",id);
   try {
     const listing = await knex("listings")
       .join("user", "listings.user_id", "=", "user.id")
@@ -71,18 +59,6 @@ const getListingById = async (req, res) => {
   }
 };
 
-//Create photo storage directory
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage: storage });
-
 //Create new Listing
 const createListing = async (req, res) => {
   const {
@@ -99,9 +75,11 @@ const createListing = async (req, res) => {
     delivery,
   } = req.body;
 
+  console.log(req.photo, req.file);
   const photo = req.file ? `uploads/${req.file.filename}` : "";
 
   const errors = [];
+
   console.log("req.body", req.body)
   console.log('req.file', req.file);
   console.log('photo', photo);
@@ -159,10 +137,9 @@ const createListing = async (req, res) => {
     return res.status(400).json({ message: "Validation errors", errors });
   }
 
-  const user_id = req.user.id;
-
   try {
     const user_id = req.user.id;
+
     const [newListingId] = await knex("listings").insert({
       user_id,
       photo,
@@ -182,6 +159,7 @@ const createListing = async (req, res) => {
     const newListing = await knex("listings")
       .where({ id: newListingId })
       .first();
+
     res.status(201).json(newListing);
   } catch (error) {
     console.error("Error creating listing:", error);
@@ -194,5 +172,4 @@ export {
   getAllListings,
   getListingById,
   getUserListings,
-  getUserListingsDemo,
 };
