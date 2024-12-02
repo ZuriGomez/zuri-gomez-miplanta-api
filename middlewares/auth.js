@@ -12,7 +12,6 @@ const authenticateUser = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("JWT", decoded);
     req.user = decoded.id;
 
     next();
