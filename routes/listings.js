@@ -16,8 +16,7 @@ router.get("/", getAllListings);
 
 router.get("/user-listings/:id", getListingById);
 
-// router.post('/', authenticateUser, createListing);
-router.post('/', upload.single('photo'), authenticateUser, createListing);
+router.post("/", upload.single("photo"), authenticateUser, createListing);
 
 router.get("/user-listings", authenticateUser, getUserListings);
 

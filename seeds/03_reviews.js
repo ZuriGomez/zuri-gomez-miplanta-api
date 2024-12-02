@@ -3,9 +3,7 @@
  * @returns { Promise<void> }
  */
 export async function seed(knex) {
-  // Deletes ALL existing entries
   await knex("reviews").del();
-  // Inserts seed entries
   await knex("reviews").insert([
     {
       reviewer_id: 2,

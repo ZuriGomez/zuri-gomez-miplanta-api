@@ -25,15 +25,9 @@ app.get("/api", async (req, res) => {
 });
 
 //Using routes
-console.log("hello")
 app.use("/api/users", usersRoutes);
 app.use("/api/listings", listingRoutes);
 app.use("/api/reviews", reviewsRoutes);
-
-// app.use((req, res, next) => {
-//   console.log(`Incoming request: ${req.method} ${req.url}`);
-//   next();
-// });
 
 // processing unsupported routes
 app.use((req, res) => {

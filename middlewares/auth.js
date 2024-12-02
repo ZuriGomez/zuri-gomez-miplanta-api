@@ -4,19 +4,18 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const authenticateUser = (req, res, next) => {
-    const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
+  const token = req.headers.authorization?.split(" ")[1]; // Bearer <token>
 
-    if (!token) {
-        return res.status(401).json({ message: "Unauthorized: No token provided" });
-      }
-    
-      try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log("JWT",decoded);
-        req.user = decoded.id;
-      
+  if (!token) {
+    return res.status(401).json({ message: "Unauthorized: No token provided" });
+  }
 
-        next();
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("JWT", decoded);
+    req.user = decoded.id;
+
+    next();
   } catch (err) {
     res.status(403).json({ message: "Invalid token" });
   }

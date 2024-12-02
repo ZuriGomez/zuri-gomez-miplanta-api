@@ -27,6 +27,7 @@ const getReviewsBySellerId = async (req, res) => {
   }
 };
 
+// Get seller's User Name
 const getSellerInfo = async (req, res) => {
   const { sellerId } = req.params;  
   try {
@@ -36,12 +37,12 @@ const getSellerInfo = async (req, res) => {
       .first();  
 
     if (seller) {
-      res.status(200).json(seller);  // Return seller info if found
+      res.status(200).json(seller); 
     } else {
-      res.status(404).json({ message: "Seller not found" });  // Return 404 if no seller is found
+      res.status(404).json({ message: "Seller not found" });  
     }
   } catch (error) {
-    res.status(500).json({ message: "Error getting seller info" });  // Return 500 error if something goes wrong
+    res.status(500).json({ message: "Error getting seller info" });  
   }
 };
 
