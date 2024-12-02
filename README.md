@@ -10,6 +10,12 @@ miPlanta is a mobile-first marketplace designed to connect plant enthusiasts and
 2. Navigate to the server directory: `cd zuri-gomez-miplanta-api`
 3. Install dependencies: `npm install`
 4. Create a `.env` file in the root of the server directory and add the following:
+BACKEND_URL=http://localhost 
+CORS_ORIGIN=http://localhost:5173 
+DB_HOST=127.0.0.1 
+DB_NAME=miplanta 
+DB_USER=root 
+DB_PASSWORD=rootroot JWT_SECRET=5uper_5ec7et_5tr1ng
 5. Start the server: `npm start`
 6. The server will run at: `http://localhost:8080`
 
