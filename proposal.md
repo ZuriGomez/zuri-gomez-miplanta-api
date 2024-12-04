@@ -27,7 +27,7 @@ Special Considerations:
 
 1. For Buyers:
     - View all available listings, including photos, titles, and prices.
-    -Filter listings by maintenance level, pot inclusion, watering needs, and more.
+    - Filter listings by maintenance level, pot inclusion, watering needs, and more.
     - Search for specific plants or browse by categories.
     -View detailed plant descriptions, including environmental needs and care instructions.
     - Choose delivery or pickup options for purchases.
