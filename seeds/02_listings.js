@@ -139,7 +139,7 @@ export async function seed(knex) {
     {
       id: 9,
       user_id: 6,
-      photo: "uploads/golden-pothos.jpg",
+      photo: "uploads/golden_pothos.jpg",
       title: "Golden Pothos",
       description:
         "A versatile and hardy plant with trailing green and yellow leaves.",
